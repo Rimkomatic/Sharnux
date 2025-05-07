@@ -16,12 +16,12 @@ puts:
     push bx
 
 .loop:
-    lodsb               ; loads next character in al
-    or al, al           ; verify if next character is null?
+    lodsb
+    or al, al
     jz .done
 
-    mov ah, 0x0E        ; call bios interrupt
-    mov bh, 0           ; set page number to 0
+    mov ah, 0x0E
+    mov bh, 0
     int 0x10
 
     jmp .loop
@@ -34,12 +34,12 @@ puts:
     
 
 main:
-    mov ax, 0           ; can't set ds/es directly
+    mov ax, 0
     mov ds, ax
     mov es, ax
     
     mov ss, ax
-    mov sp, 0x7C00      ; stack grows downwards from where we are loaded in memory
+    mov sp, 0x7C00
 
     mov si, msg_hello
     call puts
